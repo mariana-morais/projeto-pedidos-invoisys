@@ -1,0 +1,6 @@
+@miniprojeto_invoisys_HostAddress = http://localhost:5193
+
+GET {{miniprojeto_invoisys_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

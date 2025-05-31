@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pedidos Invoisys</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
+    <script src="/script/pedido.js"></script>
+</head>
+<body class="d-flex flex-column gap-4">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid container">
+                <a class="navbar-brand" href="#">Pedidos Invoisys</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Pedidos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="container-fluid container">
+        <div class="d-flex flex-row justify-content-between align-items-center mb-4">
+            <h1 class="fs-3">Lista de Pedidos</h1>
+            <button id="btnNovoPedido" class="btn btn-success">Novo pedido</button>
+        </div>
+        <div>
+            <table id="tabelaPedidos" class="display table table-bordered table-striped table-hover" style="width:100%">
+                <thead class="table-light">
+                    <tr>
+                        <th>Número do Pedido</th>
+                        <th>Data da Solicitação</th>
+                        <th>Data prevista para entrega</th>
+                        <th>Observação do Pedido</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- os produtos vao aparecer aqui -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section>
+        <div class="modal fade" id="modalNovoPedido" tabindex="-1" aria-labelledby="modalNovoPedidoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalNovoPedidoTitulo">Novo pedido</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-4 px-2">
+                                <h6 class="fw-bold mb-3 border-bottom pb-2">Detalhes do pedido</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="numeroPedido" class="form-label text-secondary">Número do pedido</label>
+                                        <input type="text" class="form-control" id="numeroPedido" required />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="dataSolicitacaoPedido" class="form-label text-secondary">Data da solicitação</label>
+                                        <input type="date" class="form-control" id="dataSolicitacaoPedido" required />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="dataPrevistaPedido" class="form-label text-secondary">Data prevista para entrega</label>
+                                        <input type="date" class="form-control" id="dataPrevistaPedido" required />
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="observacaoPedido" class="form-label text-secondary">Observação</label>
+                                        <input type="text" class="form-control" id="observacaoPedido" maxlength="300" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <section class="mb-4 px-2" id="sectionProdutoPedido">
+                                <h6 class="fw-bold mb-3 border-bottom pb-2">Produto do pedido</h6>
+                                <div class="row g-3 align-items-end">
+                                    <div class="col-md-4">
+                                        <label for="codigoProduto" class="form-label text-secondary">Código do produto</label>
+                                        <input type="text" class="form-control" id="codigoProduto" required />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="quantidadeProduto" class="form-label text-secondary">Quantidade</label>
+                                        <input type="number" class="form-control" id="quantidadeProduto" min="1" step="1" value="1" required />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="valorProduto" class="form-label text-secondary">Valor do produto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">R$</span>
+                                            <input type="text" class="form-control" id="valorProduto" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="descricaoProduto" class="form-label text-secondary">Descrição do produto</label>
+                                        <input type="text" class="form-control" id="descricaoProduto" maxlength="300" />
+                                    </div>
+                                    <div class="col-12 text-end">
+                                        <button type="button" class="btn btn-outline-success" id="btnAdicionarProduto">
+                                            Adicionar produto
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <div class="mb-4 px-2">
+                                <h6 class="fw-bold mb-3 border-bottom pb-2">Produtos adicionados</h6>
+                                <table class="table table-bordered table-striped" id="tabelaProdutos">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor</th>
+                                            <th>Descrição</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCancelarPedido">Cancelar</button>
+                        <button type="button" class="btn btn-success" id="btnSalvarPedido">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
