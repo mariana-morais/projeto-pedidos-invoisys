@@ -23,8 +23,8 @@ Um projeto simples de gerencimento de pedidos, utilizando Clean Arquitecture com
 1. Clone o repositório
 
 ```bash
-git clone https://github.com/mariana-morais/projeto-pedidos-invoisys.git
-cd projeto-pedidos-invoisy
+git clone https://github.com/mariana-morais/gerenciador-pedidos.git
+cd gerenciador-pedidos
 ```
 
 2. Execute o projeto
